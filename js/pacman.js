@@ -1,5 +1,5 @@
 var gPacman;
-var PACMAN = "ᗤ";
+var PACMAN = '<img style="transform: rotate(0deg)"  width="20px" src="img/Pacman.png">';
 
 function createPacman(board) {
   gPacman = {
@@ -74,19 +74,23 @@ function getNextLocation(keyboardEvent) {
 
   switch (keyboardEvent.code) {
     case "ArrowUp":
-      PACMAN = "ᗢ";
+      gPacmanDegree = 270;
+      rotatePacman(gPacmanDegree);
       nextLocation.i--;
       break;
     case "ArrowDown":
-      PACMAN = "ᗣ";
+      gPacmanDegree = 90;
+      rotatePacman(gPacmanDegree);
       nextLocation.i++;
       break;
     case "ArrowLeft":
-      PACMAN = "ᗤ";
+      gPacmanDegree = 180;
+      rotatePacman(gPacmanDegree);
       nextLocation.j--;
       break;
     case "ArrowRight":
-      PACMAN = "ᗧ";
+      gPacmanDegree = 0;
+      rotatePacman(gPacmanDegree);
       nextLocation.j++;
       break;
     default:
@@ -94,4 +98,13 @@ function getNextLocation(keyboardEvent) {
   }
 
   return nextLocation;
+}
+function rotatePacman(deg){
+  PACMAN = `<img  style="transform: rotate(${deg}deg)" id="pacman" width="20px" src="img/Pacman.png">`;
+}
+
+function renderCell(location, value) {
+  // Select the elCell and set the value
+  var elCell = document.querySelector(`.cell${location.i}-${location.j}`);
+  elCell.innerHTML = value;
 }
